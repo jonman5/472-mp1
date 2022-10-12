@@ -149,7 +149,7 @@ def write_to_performance_file(filename, model, classifier_task, c_matrix, c_repo
 
 # ============= Multi Later Perceptron ============================
 # For Sentiment
-X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_sentiment, test_size=0.99, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_sentiment, test_size=0.2, random_state=0)
 clf = MLPClassifier(verbose=True)
 clf.partial_fit(X_train, y_train, np.unique(y_train))
 joblib.dump(clf, "../trained/MLP_sentiment_trained.joblib")
@@ -162,7 +162,7 @@ cl_report = metrics.classification_report(y_test, y_preds)
 write_to_performance_file(PERFORMANCE_FILE_PATH, MLP, CLASSIFIER_SENTIMENT, confusion_matrix, cl_report)
 
 # For Emotion
-X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_emotion, test_size=0.99, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_emotion, test_size=0.2, random_state=0)
 clf = MLPClassifier(verbose=True)
 clf.partial_fit(X_train, y_train, np.unique(y_train))
 joblib.dump(clf, "../trained/MLP_emotion_trained.joblib")
