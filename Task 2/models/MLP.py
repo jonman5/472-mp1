@@ -23,7 +23,7 @@ from sklearn import metrics
 from sklearn.neural_network import MLPClassifier
 
 nltk.download('punkt')
-nltk.download('averaged_perceptor_tagger')
+nltk.download('averaged_perceptron_tagger')
 nltk.download('stopwords')
 # stopwords = nltk.corpus.stopwords.words('english)')
 from nltk.corpus import stopwords
