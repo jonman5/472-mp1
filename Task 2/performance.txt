@@ -2,6 +2,7 @@
 
 Multi Layer Perceptron
 Classification task: sentiment
+Using TfidfTransformer
 
 Confusion Matrix
 [[1143  485 1534  609]
@@ -24,6 +25,7 @@ weighted avg       0.58      0.58      0.58     34364
 
 Multi Layer Perceptron
 Classification task: emotion
+Using TfidfTransformer
 
 Confusion Matrix
 [[1070   21    4    2    6    2    0    3    0    0    2    0    0    1
