@@ -146,9 +146,9 @@ def write_to_performance_file(filename, model, classifier_task, c_matrix, c_repo
 
 
 # ============= Top MNB ============================
-X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_sentiment, test_size=0.99, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_sentiment, test_size=0.2, random_state=0)
 clf = MultinomialNB()
-parameters = {'alpha': (0.5, 0.0, 2.0)}
+parameters = {'alpha': (0.5, 0.0, 1.0, 0.8)}
 
 grid = GridSearchCV(clf, parameters)
 grid.fit(X_train, y_train)
