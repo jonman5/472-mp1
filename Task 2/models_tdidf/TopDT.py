@@ -137,8 +137,8 @@ def write_to_performance_file(filename, model, classifier_task, c_matrix, c_repo
     with open(filename, 'a', encoding='UTF-8') as file:
         file.write(model)
         file.write("\n")
-        file.write("Classification task: " + classifier_task)
-        file.write("\n")
+        file.write("Classification task: " + classifier_task + "\n")
+        file.write("Using TfidfTransformer\n")
         file.write("\nConfusion Matrix\n")
         file.write(str(c_matrix))
         file.write("\n\nClassification Report\n")
