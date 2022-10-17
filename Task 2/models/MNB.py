@@ -105,7 +105,7 @@ df['text'] = [' '.join(map(str, ln)) for ln in df['text']]
 df['text'] = df['text'].str.lower()
 df['text'] = df['text'].apply(lambda x: re.sub(r'[^\w\d\s\']+', '', x))
 
-# nlkt tokenization
+# nltk tokenization
 # df['text_tokenized'] = df['text'].apply(word_tokenize)
 
 # encode labels columns
