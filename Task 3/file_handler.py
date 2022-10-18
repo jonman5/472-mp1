@@ -8,12 +8,11 @@ from gensim.models import KeyedVectors, Word2Vec
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
-
 class Task3:
     def __init__(self):
         self.w2model = api.load("word2vec-google-news-300")
-        self.posts, self.sentiments, self.emotions = []
-        self.encoded_emotions, self.encoded_sentiments = []
+        self.posts, self.sentiments, self.emotions = [], [], []
+        self.encoded_emotions, self.encoded_sentiments = [], []
         self.average_embeddings = []
         self.hit_rates = []
         self.tokenized_posts = []
