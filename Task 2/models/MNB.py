@@ -59,7 +59,7 @@ PERFORMANCE_FILE_PATH = "../../Task 2/performance.txt"
 TRAIN_CSV_FILE_PATH = "../../Task 2/train.csv"
 MAIN_DATA_FILE_PATH = "../../Task 1/goemotions.json.gz"
 
-# Reading data from GoEmotions file and storing in variable raw_data
+
 with gzip.open(MAIN_DATA_FILE_PATH, 'rt') as zipfile:
     raw_data = json.load(zipfile)
 
@@ -70,7 +70,7 @@ for line in raw_data:
 
 vectorizer = CountVectorizer()
 vectorizer.fit(corpus)
-print("The size of vocabulary is ", vectorizer.vocabulary_.__sizeof__())
+# print("The size of vocabulary is ", vectorizer.vocabulary_.__sizeof__())
 
 # DATA PREPARATION
 header = ['text', 'emotion', 'sentiment']
