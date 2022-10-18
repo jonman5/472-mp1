@@ -3,6 +3,7 @@ import json
 
 import gensim.downloader as api
 from nltk.tokenize import word_tokenize
+from gensim.models import KeyedVectors, Word2Vec
 
 
 class Part3:
@@ -82,6 +83,10 @@ class Part3:
     def display_nr_tokens(self):
         print("Total Number of tokens in all posts: ", len(self.tokenized_posts))
 
+    def display_embeddings_test(self):
+        embeddings = self.w2model.get_vector('computer')  # get numpy vector of a word
+        print(embeddings)
+
 
 def main():
     p3 = Part3()
@@ -90,6 +95,7 @@ def main():
     p3.compute_embeddings_and_hit_rates_partial_for_debugging(1)
     print(p3.get_embedding_scores())
     print(p3.get_hit_rates())
+    # p3.display_embeddings_test()
 
 
 if __name__ == '__main__':
