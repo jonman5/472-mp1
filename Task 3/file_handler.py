@@ -84,7 +84,10 @@ class Part3:
         return self.average_embeddings
 
     def display_nr_tokens(self):
-        print("Total Number of tokens in all posts: ", len(self.tokenized_posts))
+        no_tokens = 0
+        for tokenized_post in self.tokenized_posts:
+            no_tokens += len(tokenized_post)
+        print("Total Number of tokens in all posts: ", no_tokens)
 
     def display_embeddings_test(self):
         embeddings = self.w2model.get_vector('computer')  # get numpy vector of a word
@@ -98,7 +101,7 @@ def main():
     p3.tokenize_posts_partial_for_debugging(p3.get_posts(), debugging_nr_posts)
     p3.display_nr_tokens()
     p3.compute_embeddings_and_hit_rates_partial_for_debugging(debugging_nr_posts)
-    print(p3.get_embedding_scores())
+    #print(p3.get_embedding_scores())
     print(p3.get_hit_rates())
     # p3.display_embeddings_test()
 
