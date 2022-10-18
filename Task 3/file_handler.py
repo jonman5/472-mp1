@@ -9,7 +9,7 @@ from gensim.models import KeyedVectors, Word2Vec
 class Part3:
     def __init__(self):
         self.w2model = api.load("word2vec-google-news-300")
-        self.posts_average_emb_scores = []
+        self.average_embeddings = []
         self.hit_rates = []
         self.tokenized_posts = []
 
@@ -33,57 +33,55 @@ class Part3:
 
     def compute_embeddings_and_hit_rates(self):
         model = self.w2model
-        for tp in self.tokenized_posts:
-            sum_embeddings = 0
-            nr_words = 0
-            missed_words = 0
+
+        # Loop through the tokenized posts and append embedddings to 'average_embeddings'
+        # As well as hit rates to 'hit_rates'
+        for tokenized_post in self.tokenized_posts:
+            skipped_words = 0
             hit_rate = 0
-            for w in tp:
-                try:
-                    tp = model.most_similar(w)[0]
-                    vl = tp[1]
-                    sum_embeddings += vl
-                    nr_words += 1
-                except KeyError:
-                    missed_words += 1
-                    continue
+
+            # Get mean word embeddings vector from pre-trained model from tokenized post
+            self.average_embeddings.append(model.get_mean_vector(tokenized_post))
+
+            # Calculate hit rate for the tokenized post
+            for word in tokenized_post:
+                if not model.__contains__(word):
+                    skipped_words += 1
             try:
-                post_average = sum_embeddings / nr_words
-                hit_rate = ((nr_words - missed_words) / nr_words) * 100
+                no_of_words = len(tokenized_post)
+                hit_rate = ((no_of_words - skipped_words) / no_of_words) * 100
             except ZeroDivisionError:
                 post_average = 0
-            self.posts_average_emb_scores.append(post_average)
             self.hit_rates.append(hit_rate)
 
     def compute_embeddings_and_hit_rates_partial_for_debugging(self, nr_posts):
         model = self.w2model
+
+        # Loop through the tokenized posts and append embedddings to 'average_embeddings'
+        # As well as hit rates to 'hit_rates'
         for tokenized_post in self.tokenized_posts[:nr_posts]:
-            nr_words = 0
-            missed_words = 0
+            skipped_words = 0
             hit_rate = 0
 
+            # Get mean word embeddings vector from pre-trained model from tokenized post
+            self.average_embeddings.append(model.get_mean_vector(tokenized_post))
+
+            # Calculate hit rate for the tokenized post
+            for word in tokenized_post:
+                if not model.__contains__(word):
+                    skipped_words += 1
             try:
-                mean_embeddings = model.get_mean_vector(tokenized_post)
-                # tokenized_posts = model.most_similar(w)[0]
-                # vl = tokenized_posts[1]
-                # sum_embeddings += vl
-                # nr_words += 1
-            except KeyError:
-                missed_words += 1
-                continue
-            # try:
-            #     post_average = sum_embeddings / nr_words
-            #     hit_rate = ((nr_words - missed_words) / nr_words) * 100
-            # except ZeroDivisionError:
-            #     post_average = 0
-            self.posts_average_emb_scores.append(mean_embeddings)
+                no_of_words = len(tokenized_post)
+                hit_rate = ((no_of_words - skipped_words) / no_of_words) * 100
+            except ZeroDivisionError:
+                post_average = 0
             self.hit_rates.append(hit_rate)
 
     def get_hit_rates(self):
         return self.hit_rates
 
     def get_embedding_scores(self):
-        return self.posts_average_emb_scores
+        return self.average_embeddings
 
     def display_nr_tokens(self):
         print("Total Number of tokens in all posts: ", len(self.tokenized_posts))
