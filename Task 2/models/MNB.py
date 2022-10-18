@@ -7,7 +7,6 @@ import pandas as pd
 import contractions
 
 import matplotlib.pyplot as plt
-import seaborn
 from matplotlib import rcParams
 import seaborn as sns
 import itertools
