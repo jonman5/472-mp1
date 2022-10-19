@@ -2,7 +2,7 @@ import joblib
 from sklearn import metrics
 from sklearn.neural_network import MLPClassifier
 
-import Task3
+from Task3 import Task3
 
 
 def write_to_performance_file(filename, model, classifier_task, c_matrix, c_report):
@@ -20,13 +20,11 @@ def write_to_performance_file(filename, model, classifier_task, c_matrix, c_repo
 
 # Initialize class Task3 to do all the steps up to 3.5
 task3 = Task3()
-debugging_nr_posts = 3
-# task3.tokenize_posts(task3.get_posts())
-task3.tokenize_posts_partial_for_debugging(task3.get_posts(), debugging_nr_posts)
+# debugging_nr_posts = 3
+task3.tokenize_posts(task3.get_posts())
 task3.display_nr_tokens()
-task3.compute_embeddings_and_hit_rates_partial_for_debugging(debugging_nr_posts)
-# print(task3.get_embedding_scores())
-print(task3.get_hit_rates())
+task3.compute_embeddings_and_hit_rates()
+# print(task3.get_hit_rates())
 # task3.display_embeddings_test()
 
 # Initialize and train base-MLP model for emotions classifier
