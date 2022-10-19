@@ -105,17 +105,11 @@ class Task3:
         self.encoded_emotions = label_encoder_emotion.fit_transform(self.emotions)
         self.encoded_sentiments = label_encoder_sentiment.fit_transform(self.sentiments)
 
-    def prepare_train_test_data(self):
-        x_train_emotions, x_test_emotions, y_train_emotions, y_test_emotions = train_test_split(
-            self.average_embeddings,
-            self.encoded_emotions,
-            test_size=0.2,
-            random_state=0)
-        x_train_sentiments, x_test_sentiments, y_train_sentiments, y_test_sentiments = train_test_split(
-            self.average_embeddings,
-            self.encoded_sentiments,
-            test_size=0.2,
-            random_state=0)
+    def get_train_test_data(self, classification):
+        if classification is "emotions":
+            return train_test_split(self.average_embeddings, self.encoded_emotions, test_size=0.2, random_state=0)
+        elif classification is "sentiments":
+            return train_test_split(self.average_embeddings, self.encoded_sentiments, test_size=0.2, random_state=0)
 
     def get_hit_rates(self):
         return self.hit_rates
