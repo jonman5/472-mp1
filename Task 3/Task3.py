@@ -105,10 +105,10 @@ class Task3:
         self.encoded_emotions = label_encoder_emotion.fit_transform(self.emotions)
         self.encoded_sentiments = label_encoder_sentiment.fit_transform(self.sentiments)
 
-    def get_train_test_data(self, classification):
+    def get_train_test_data(self, classification, test_size):
         self.encode_emotions_sentiments()
         if classification == "emotions":
-            return train_test_split(self.average_embeddings, self.encoded_emotions, test_size=0.2, random_state=0)
+            return train_test_split(self.average_embeddings, self.encoded_emotions, test_size=test_size, random_state=0)
         elif classification == "sentiments":
             return train_test_split(self.average_embeddings, self.encoded_sentiments, test_size=0.2, random_state=0)
 
