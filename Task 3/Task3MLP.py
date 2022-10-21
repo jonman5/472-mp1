@@ -19,7 +19,7 @@ def write_to_performance_file(filename, model, classifier_task, c_matrix, c_repo
 
 
 # Initialize class Task3 to do all the steps up to 3.5
-task3 = Task3()
+task3 = Task3("word2vec-google-news-300")
 # debugging_nr_posts = 3
 task3.tokenize_posts(task3.get_posts())
 task3.display_nr_tokens()

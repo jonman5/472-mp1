@@ -10,8 +10,8 @@ from sklearn.preprocessing import LabelEncoder
 
 
 class Task3:
-    def __init__(self):
-        self.w2model = api.load("word2vec-google-news-300")
+    def __init__(self, embedding_model_name):
+        self.w2model = api.load(embedding_model_name)
         self.posts, self.sentiments, self.emotions = [], [], []
         self.encoded_emotions, self.encoded_sentiments = [], []
         self.average_embeddings = []
