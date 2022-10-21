@@ -29,18 +29,19 @@ task3.compute_embeddings_and_hit_rates()
 # task3.display_embeddings_test()
 
 # define GridSearch parameters
-gridsearch_parameters = {'activation': ('logistic', 'tanh', 'identity'),
-              'hidden_layer_sizes': ((30, 50, 20), (10, 10, 10)),
+gridsearch_parameters = {'activation': ('sigmoid', 'relu', 'tanh', 'identity'),
+              'hidden_layer_sizes': ((30, 50), (10, 10, 10)),
               'solver': ('adam', 'sgd')}
 
 # Initialize and train Top-MLP model for emotions classifier
 x_train_emotions, x_test_emotions, y_train_emotions, y_test_emotions = task3.get_train_test_data("emotions", 0.2)
 
 MLP_emotions_model = MLPClassifier(verbose=True)
-optimized_model = GridSearchCV(MLP_emotions_model, gridsearch_parameters)
+optimized_model = GridSearchCV(MLP_emotions_model, gridsearch_parameters, scoring='f1_weighted')
 optimized_model.fit(x_train_emotions, y_train_emotions)
 joblib.dump(optimized_model, "Top_MLP_emotions_trained.joblib")
 print("Top-MLP emotions model trained and saved to disk")
+print("Best Parameters: ", optimized_model.best_params_)
 
 y_emotions_predictions = optimized_model.predict(x_test_emotions)
 
@@ -54,10 +55,11 @@ write_to_performance_file("performance.txt", "Multi Layer Perceptron", "emotion"
 x_train_sentiments, x_test_sentiments, y_train_sentiments, y_test_sentiments = task3.get_train_test_data("sentiments",
                                                                                                          0.2)
 MLP_sentiments_model = MLPClassifier(verbose=True)
-optimized_model = GridSearchCV(MLP_emotions_model, gridsearch_parameters)
+optimized_model = GridSearchCV(MLP_emotions_model, gridsearch_parameters, scoring='f1_weighted')
 optimized_model.fit(x_train_sentiments, y_train_sentiments)
 joblib.dump(optimized_model, "Top_MLP_sentiments_trained.joblib")
 print("Top-MLP sentiments model trained and saved to disk")
+print("Best Parameters: ", optimized_model.best_params_)
 
 y_sentiments_predictions = optimized_model.predict(x_test_sentiments)
 
