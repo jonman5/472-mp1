@@ -120,3 +120,83 @@ Classification Report
     accuracy                           0.43     34364
    macro avg       0.46      0.19      0.21     34364
 weighted avg       0.47      0.43      0.34     34364
+Top-Multinomial Naive Bayes
+Classification task: sentiment
+
+Confusion Matrix
+[[1414  622 1093  642]
+ [ 503 4647 1699  925]
+ [1060 2213 5198 2596]
+ [ 477 1059 1981 8235]]
+
+Classification Report
+              precision    recall  f1-score   support
+
+           0       0.41      0.37      0.39      3771
+           1       0.54      0.60      0.57      7774
+           2       0.52      0.47      0.49     11067
+           3       0.66      0.70      0.68     11752
+
+    accuracy                           0.57     34364
+   macro avg       0.53      0.54      0.53     34364
+weighted avg       0.56      0.57      0.56     34364
+Top-Multinomial Naive Bayes
+Classification task: emotion
+
+Confusion Matrix
+[[  169  1017 10892  6743]
+ [   85  4709 19632 13734]
+ [  181  3066 29733 21758]
+ [   97  1752 19101 37433]]
+
+Classification Report
+              precision    recall  f1-score   support
+
+           0       0.32      0.01      0.02     18821
+           1       0.45      0.12      0.19     38160
+           2       0.37      0.54      0.44     54738
+           3       0.47      0.64      0.54     58383
+
+    accuracy                           0.42    170102
+   macro avg       0.40      0.33      0.30    170102
+weighted avg       0.42      0.42      0.37    170102
+Top-Multinomial Naive Bayes
+Classification task: sentiment
+
+Confusion Matrix
+[[1414  622 1093  642]
+ [ 503 4647 1699  925]
+ [1060 2213 5198 2596]
+ [ 477 1059 1981 8235]]
+
+Classification Report
+              precision    recall  f1-score   support
+
+           0       0.41      0.37      0.39      3771
+           1       0.54      0.60      0.57      7774
+           2       0.52      0.47      0.49     11067
+           3       0.66      0.70      0.68     11752
+
+    accuracy                           0.57     34364
+   macro avg       0.53      0.54      0.53     34364
+weighted avg       0.56      0.57      0.56     34364
+Top-Multinomial Naive Bayes
+Classification task: emotion
+
+Confusion Matrix
+[[  169  1017 10892  6743]
+ [   85  4709 19632 13734]
+ [  181  3066 29733 21758]
+ [   97  1752 19101 37433]]
+
+Classification Report
+              precision    recall  f1-score   support
+
+           0       0.32      0.01      0.02     18821
+           1       0.45      0.12      0.19     38160
+           2       0.37      0.54      0.44     54738
+           3       0.47      0.64      0.54     58383
+
+    accuracy                           0.42    170102
+   macro avg       0.40      0.33      0.30    170102
+weighted avg       0.42      0.42      0.37    170102
