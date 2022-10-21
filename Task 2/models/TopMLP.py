@@ -144,19 +144,38 @@ def write_to_performance_file(filename, model, classifier_task, c_matrix, c_repo
 
 
 # ============= Top MLP ============================
-X_train, X_test, y_train, y_test = train_test_split(df_counts, targets_sentiment, test_size=0.99, random_state=0)
-clf = MLPClassifier(verbose=True)
-parameters = {'activation': ('logistic', 'tanh', 'identity'),
+# For Sentiment
+X_train, X_test, y_train, y_test = train_test_split(df_counts, targets_sentiment, test_size=0.2, random_state=0)
+classifier = MLPClassifier(verbose=True)
+parameters = {'activation': ('logistic', 'tanh', 'relu', 'identity'),
               'hidden_layer_sizes': ((30, 50), (10, 10, 10)),
               'solver': ('adam', 'sgd')}
 
-grid = GridSearchCV(clf, parameters)
-# grid.fit(X_train, y_train)
-print("Top MLP")
-# print("Best Parameters: ", grid.best_params_)
+grid_search = GridSearchCV(classifier, parameters, scoring='f1_weighted')
+top_classifier = grid_search.fit(X_train, y_train)
+print("********Top MLP********")
+joblib.dump(classifier, "../trained/TOP_MLP_sentiment_trained.joblib")
+print(MLP + " for classifier " + CLASSIFIER_SENTIMENT + " trained")
+("Best Parameters: ", top_classifier.best_params_)
 
+y_preds = classifier.predict(X_test)
+confusion_matrix = metrics.confusion_matrix(y_test, y_preds)
+cl_report = metrics.classification_report(y_test, y_preds)
 
+write_to_performance_file(PERFORMANCE_FILE_PATH, "Top-" + MLP, CLASSIFIER_SENTIMENT, confusion_matrix, cl_report)
 
+# For Emotion
+X_train, X_test, y_train, y_test = train_test_split(df_counts, targets_sentiment, test_size=0.99, random_state=0)
+classifier = MLPClassifier(verbose=True)
 
+grid_search = GridSearchCV(classifier, parameters, scoring='f1_weighted')
+top_classifier = grid_search.fit(X_train, y_train)
+joblib.dump(classifier, "../trained/TOP_MLP_emotion_trained.joblib")
+print(MLP + " for classifier " + CLASSIFIER_EMOTION + " trained")
+("Best Parameters: ", top_classifier.best_params_)
 
+y_preds = classifier.predict(X_test)
+confusion_matrix = metrics.confusion_matrix(y_test, y_preds)
+cl_report = metrics.classification_report(y_test, y_preds)
 
+write_to_performance_file(PERFORMANCE_FILE_PATH, "Top-" + MLP, CLASSIFIER_EMOTION, confusion_matrix, cl_report)
