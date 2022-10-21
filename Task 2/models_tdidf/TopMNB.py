@@ -50,9 +50,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.preprocessing import LabelEncoder
 
 # CONSTANTS
-MNB = "Multinomial Naive Bayes"
-DT = "Decision Tree"
-MLP = "Multi Layer Perceptron"
+MNB = "Multinomial Naive Bayes using TfidfTransformer"
+DT = "Decision Tree using TfidfTransformer"
+MLP = "Multi Layer Perceptron using TfidfTransformer"
 CLASSIFIER_SENTIMENT = "sentiment"
 CLASSIFIER_EMOTION = "emotion"
 PERFORMANCE_FILE_PATH = "../../Task 2/performance.txt"
@@ -146,14 +146,36 @@ def write_to_performance_file(filename, model, classifier_task, c_matrix, c_repo
 
 
 # ============= Top MNB ============================
+# For Sentiment
 X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_sentiment, test_size=0.2, random_state=0)
-clf = MultinomialNB()
+classifier = MultinomialNB()
 parameters = {'alpha': (0.5, 0.0, 1.0, 0.8)}
 
-grid = GridSearchCV(clf, parameters)
-grid.fit(X_train, y_train)
-print("Top MNB")
-print("Best Parameters: ", grid.best_params_)
+grid_search = GridSearchCV(classifier, parameters, scoring='f1_weighted')
+top_classifier = grid_search.fit(X_train, y_train)
+print("********Top MNB********")
+joblib.dump(classifier, "../trained/tfidf_TOP_MNB_emotion_trained.joblib")
+print(MLP + " for classifier " + CLASSIFIER_SENTIMENT + " trained")
+("Best Parameters: ", top_classifier.best_params_)
 
+y_preds = classifier.predict(X_test)
+confusion_matrix = metrics.confusion_matrix(y_test, y_preds)
+cl_report = metrics.classification_report(y_test, y_preds)
 
+write_to_performance_file(PERFORMANCE_FILE_PATH, "Top-" + MNB, CLASSIFIER_SENTIMENT, confusion_matrix, cl_report)
 
+# For Emotion
+X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_sentiment, test_size=0.99, random_state=0)
+classifier = MultinomialNB()
+
+grid_search = GridSearchCV(classifier, parameters, scoring='f1_weighted')
+top_classifier = grid_search.fit(X_train, y_train)
+joblib.dump(classifier, "../trained/tfidf_TOP_MNB_emotion_trained.joblib")
+print(MLP + " for classifier " + CLASSIFIER_EMOTION + " trained")
+("Best Parameters: ", top_classifier.best_params_)
+
+y_preds = classifier.predict(X_test)
+confusion_matrix = metrics.confusion_matrix(y_test, y_preds)
+cl_report = metrics.classification_report(y_test, y_preds)
+
+write_to_performance_file(PERFORMANCE_FILE_PATH, "Top-" + MNB, CLASSIFIER_EMOTION, confusion_matrix, cl_report)

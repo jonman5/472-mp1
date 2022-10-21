@@ -26,9 +26,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.preprocessing import LabelEncoder
 
 # CONSTANTS
-MNB = "Multinomial Naive Bayes"
-DT = "Decision Tree"
-MLP = "Multi Layer Perceptron"
+MNB = "Multinomial Naive Bayes using TfidfTransformer"
+DT = "Decision Tree using TfidfTransformer"
+MLP = "Multi Layer Perceptron using TfidfTransformer"
 CLASSIFIER_SENTIMENT = "sentiment"
 CLASSIFIER_EMOTION = "emotion"
 PERFORMANCE_FILE_PATH = "../../Task 2/performance.txt"
@@ -126,12 +126,12 @@ def write_to_performance_file(filename, model, classifier_task, c_matrix, c_repo
 # For Sentiment
 X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_sentiment, test_size=0.2, random_state=0)
 
-clf = DecisionTreeClassifier()
-clf.fit(X_train, y_train)
-joblib.dump(clf, "../trained/DT_sentiment_trained.joblib")
+classifier = DecisionTreeClassifier()
+classifier.fit(X_train, y_train)
+joblib.dump(classifier, "../trained/DT_sentiment_trained.joblib")
 print(DT + " for classifier " + CLASSIFIER_SENTIMENT + " trained")
 
-y_preds = clf.predict(X_test)
+y_preds = classifier.predict(X_test)
 confusion_matrix = metrics.confusion_matrix(y_test, y_preds)
 cl_report = metrics.classification_report(y_test, y_preds)
 
@@ -140,12 +140,12 @@ write_to_performance_file(PERFORMANCE_FILE_PATH, DT, CLASSIFIER_SENTIMENT, confu
 # For Emotion
 X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_emotion, test_size=0.2, random_state=0)
 
-clf = DecisionTreeClassifier()
-clf.fit(X_train, y_train)
-joblib.dump(clf, "../trained/DT_emotion_trained.joblib")
+classifier = DecisionTreeClassifier()
+classifier.fit(X_train, y_train)
+joblib.dump(classifier, "../trained/DT_emotion_trained.joblib")
 print(DT + " for classifier " + CLASSIFIER_EMOTION + " trained")
 
-y_preds = clf.predict(X_test)
+y_preds = classifier.predict(X_test)
 confusion_matrix = metrics.confusion_matrix(y_test, y_preds)
 cl_report = metrics.classification_report(y_test, y_preds)
 
