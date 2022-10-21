@@ -151,11 +151,11 @@ parameters = {'alpha': (0.5, 0.0, 1.0, 0.8)}
 grid_search = GridSearchCV(classifier, parameters, scoring='f1_weighted')
 top_classifier = grid_search.fit(X_train, y_train)
 print("********Top MNB********")
-joblib.dump(classifier, "../trained/TOP_MNB_emotion_trained.joblib")
+joblib.dump(top_classifier, "../trained/TOP_MNB_sentiment_trained.joblib")
 print(MLP + " for classifier " + CLASSIFIER_SENTIMENT + " trained")
 print("Best Parameters: ", top_classifier.best_params_)
 
-y_preds = classifier.predict(X_test)
+y_preds = top_classifier.predict(X_test)
 confusion_matrix = metrics.confusion_matrix(y_test, y_preds)
 cl_report = metrics.classification_report(y_test, y_preds)
 
@@ -167,11 +167,11 @@ classifier = MultinomialNB()
 
 grid_search = GridSearchCV(classifier, parameters, scoring='f1_weighted')
 top_classifier = grid_search.fit(X_train, y_train)
-joblib.dump(classifier, "../trained/TOP_MNB_emotion_trained.joblib")
+joblib.dump(top_classifier, "../trained/TOP_MNB_emotion_trained.joblib")
 print(MLP + " for classifier " + CLASSIFIER_EMOTION + " trained")
 print("Best Parameters: ", top_classifier.best_params_)
 
-y_preds = classifier.predict(X_test)
+y_preds = top_classifier.predict(X_test)
 confusion_matrix = metrics.confusion_matrix(y_test, y_preds)
 cl_report = metrics.classification_report(y_test, y_preds)
 
