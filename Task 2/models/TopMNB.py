@@ -136,7 +136,7 @@ def write_to_performance_file(filename, model, classifier_task, c_matrix, c_repo
         file.write("\n")
         file.write("Classification task: " + classifier_task)
         file.write("\n")
-        file.write("Hyper parameters used:" + best_params + "\n")
+        file.write("Hyper parameters used:" + str(best_params) + "\n")
         file.write("\nConfusion Matrix\n")
         file.write(str(c_matrix))
         file.write("\n\nClassification Report\n")
