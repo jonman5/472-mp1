@@ -152,7 +152,7 @@ grid_search = GridSearchCV(classifier, parameters, scoring='f1_weighted')
 top_classifier = grid_search.fit(X_train, y_train)
 print("********Top MNB********")
 joblib.dump(top_classifier, "../trained/TOP_MNB_sentiment_trained.joblib")
-print(MLP + " for classifier " + CLASSIFIER_SENTIMENT + " trained")
+print(MNB + " for classifier " + CLASSIFIER_SENTIMENT + " trained")
 print("Best Parameters: ", top_classifier.best_params_)
 
 y_preds = top_classifier.predict(X_test)
@@ -162,13 +162,13 @@ cl_report = metrics.classification_report(y_test, y_preds)
 write_to_performance_file(PERFORMANCE_FILE_PATH, "Top-" + MNB, CLASSIFIER_SENTIMENT, confusion_matrix, cl_report)
 
 # For Emotion
-X_train, X_test, y_train, y_test = train_test_split(df_counts, targets_sentiment, test_size=0.99, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(df_counts, targets_emotion, test_size=0.2, random_state=0)
 classifier = MultinomialNB()
 
 grid_search = GridSearchCV(classifier, parameters, scoring='f1_weighted')
 top_classifier = grid_search.fit(X_train, y_train)
 joblib.dump(top_classifier, "../trained/TOP_MNB_emotion_trained.joblib")
-print(MLP + " for classifier " + CLASSIFIER_EMOTION + " trained")
+print(MNB + " for classifier " + CLASSIFIER_EMOTION + " trained")
 print("Best Parameters: ", top_classifier.best_params_)
 
 y_preds = top_classifier.predict(X_test)

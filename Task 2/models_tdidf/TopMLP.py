@@ -167,7 +167,7 @@ cl_report = metrics.classification_report(y_test, y_preds)
 write_to_performance_file(PERFORMANCE_FILE_PATH, "Top-" + MLP, CLASSIFIER_SENTIMENT, confusion_matrix, cl_report)
 
 # For Emotion
-X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_sentiment, test_size=0.99, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_emotion, test_size=0.2, random_state=0)
 classifier = MLPClassifier(verbose=True)
 
 grid_search = GridSearchCV(classifier, parameters, scoring='f1_weighted')
