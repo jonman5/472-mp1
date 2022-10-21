@@ -130,12 +130,13 @@ count_vectorizer = CountVectorizer(ngram_range=(1, 2))
 # fit data to the count vectorizer
 df_counts = count_vectorizer.fit_transform(df['text'].values)
 
-def write_to_performance_file(filename, model, classifier_task, c_matrix, c_report):
+def write_to_performance_file(filename, model, classifier_task, c_matrix, c_report, best_params):
     with open(filename, 'a', encoding='UTF-8') as file:
         file.write(model)
         file.write("\n")
         file.write("Classification task: " + classifier_task)
         file.write("\n")
+        file.write("Hyper parameters used:" + best_params + "\n")
         file.write("\nConfusion Matrix\n")
         file.write(str(c_matrix))
         file.write("\n\nClassification Report\n")
@@ -161,7 +162,7 @@ y_preds = top_classifier.predict(X_test)
 confusion_matrix = metrics.confusion_matrix(y_test, y_preds)
 cl_report = metrics.classification_report(y_test, y_preds)
 
-write_to_performance_file(PERFORMANCE_FILE_PATH, "Top-" + DT, CLASSIFIER_SENTIMENT, confusion_matrix, cl_report)
+write_to_performance_file(PERFORMANCE_FILE_PATH, "Top-" + DT, CLASSIFIER_SENTIMENT, confusion_matrix, cl_report, top_classifier.best_params_)
 
 # For Emotion
 X_train, X_test, y_train, y_test = train_test_split(df_counts, targets_emotion, test_size=0.2, random_state=0)
@@ -177,7 +178,7 @@ y_preds = top_classifier.predict(X_test)
 confusion_matrix = metrics.confusion_matrix(y_test, y_preds)
 cl_report = metrics.classification_report(y_test, y_preds)
 
-write_to_performance_file(PERFORMANCE_FILE_PATH, "Top-" + DT, CLASSIFIER_EMOTION, confusion_matrix, cl_report)
+write_to_performance_file(PERFORMANCE_FILE_PATH, "Top-" + DT, CLASSIFIER_EMOTION, confusion_matrix, cl_report, top_classifier.best_params_)
 
 
 
