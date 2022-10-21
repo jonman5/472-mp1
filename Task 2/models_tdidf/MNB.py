@@ -151,7 +151,7 @@ def write_to_performance_file(filename, model, classifier_task, c_matrix, c_repo
 X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_sentiment, test_size=0.2, random_state=0)
 classifier = MultinomialNB()
 classifier.fit(X_train, y_train)
-joblib.dump(classifier, "../trained/MNB_sentiment_trained.joblib")
+joblib.dump(classifier, "../trained/Tfidf_MNB_sentiment_trained.joblib")
 print(MNB + " for classifier " + CLASSIFIER_SENTIMENT + " trained")
 
 y_preds = classifier.predict(X_test)
@@ -164,7 +164,7 @@ write_to_performance_file(PERFORMANCE_FILE_PATH, MNB, CLASSIFIER_SENTIMENT, conf
 X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_emotion, test_size=0.2, random_state=0)
 classifier = MultinomialNB()
 classifier.fit(X_train, y_train)
-joblib.dump(classifier, "../trained/MNB_emotion_trained.joblib")
+joblib.dump(classifier, "../trained/Tfidf_MNB_emotion_trained.joblib")
 print(MNB + " for classifier " + CLASSIFIER_EMOTION + " trained")
 
 y_preds = classifier.predict(X_test)

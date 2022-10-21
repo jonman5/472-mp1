@@ -128,7 +128,7 @@ X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_sentiment,
 
 classifier = DecisionTreeClassifier()
 classifier.fit(X_train, y_train)
-joblib.dump(classifier, "../trained/DT_sentiment_trained.joblib")
+joblib.dump(classifier, "../trained/Tfidf_DT_sentiment_trained.joblib")
 print(DT + " for classifier " + CLASSIFIER_SENTIMENT + " trained")
 
 y_preds = classifier.predict(X_test)
@@ -142,7 +142,7 @@ X_train, X_test, y_train, y_test = train_test_split(df_tfidf, targets_emotion, t
 
 classifier = DecisionTreeClassifier()
 classifier.fit(X_train, y_train)
-joblib.dump(classifier, "../trained/DT_emotion_trained.joblib")
+joblib.dump(classifier, "../trained/Tfidf_DT_emotion_trained.joblib")
 print(DT + " for classifier " + CLASSIFIER_EMOTION + " trained")
 
 y_preds = classifier.predict(X_test)
