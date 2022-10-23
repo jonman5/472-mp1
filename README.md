@@ -1,5 +1,9 @@
 # 472-mp1
 #### Mini project 1 for COMP 472
+##### Submitted by
+Mircea Chirca 40004027  
+Jonathan Perlman 40094762  
+Tanzil Multani 40179857
 ### Instructions
 #### 1. Download goemotions.json.gz dataset provided on the course moodle page
 #### 2. Copy goemotions.json.gz to the following locations relative to the root project folder: 
